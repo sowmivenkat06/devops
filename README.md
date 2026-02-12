@@ -1,4 +1,4 @@
-# Linux, Windows, VM & Commands (Quick Notes)
+# Linux, Windows, VM & Commands
 
 ## **Windows OS**
 
