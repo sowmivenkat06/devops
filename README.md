@@ -1,8 +1,5 @@
 # 🚀 DevOps Project – Docker & Git Implementation
 
-## 📌 Repository
-**GitHub:** sowmivenkat06/devops  
-
 ---
 
 # 🌐 IPv4 – Address Allocation
