@@ -1,1 +1,253 @@
 
+📌 What is Terraform?
+
+Terraform is an Infrastructure as Code (IaC) tool used to define, provision, and manage cloud and on-prem resources using configuration files.
+
+Instead of manually creating servers, networks, or security groups, we write code.
+
+🧭 Terraform Workflow
+Write → Init → Validate → Plan → Apply → Verify → Destroy (if needed)
+
+1️⃣ Write Configuration Files
+
+Create .tf files describing the infrastructure.
+
+Example resources:
+
+Provider (AWS/Azure/GCP)
+
+Virtual machines / EC2
+
+Security groups
+
+Key pairs
+
+Networks
+
+Example:
+
+provider "aws" {
+  region = "ap-south-1"
+}
+
+resource "aws_instance" "myvm" {
+  ami           = "ami-xxxxxxxx"
+  instance_type = "t3.micro"
+}
+
+2️⃣ Initialize Terraform
+terraform init
+
+
+What happens:
+
+Downloads provider plugins
+
+Prepares backend
+
+Creates .terraform folder
+
+Locks provider versions
+
+Run this first time or whenever providers change.
+
+3️⃣ Validate Configuration
+terraform validate
+
+
+Checks:
+✔ syntax
+✔ required arguments
+✔ internal consistency
+
+Does not contact cloud.
+
+4️⃣ Preview Changes (Execution Plan)
+terraform plan
+
+
+Shows:
+
+What will be created
+
+What will be modified
+
+What will be destroyed
+
+No resources are built yet.
+
+Think of it as a dry run.
+
+5️⃣ Apply Changes
+terraform apply
+
+
+Terraform will:
+
+Ask for confirmation
+
+Create resources in the cloud
+
+Generate/update terraform.tfstate
+
+You can skip confirmation:
+
+terraform apply -auto-approve
+
+6️⃣ Verify Resources
+
+After apply:
+
+Login to cloud console
+
+Check instances
+
+Verify IP, security rules, etc.
+
+7️⃣ Update Infrastructure
+
+Modify .tf files → run:
+
+terraform plan
+terraform apply
+
+
+Terraform compares state vs new config and adjusts.
+
+8️⃣ Destroy Infrastructure (Avoid Billing 💰)
+terraform destroy
+
+
+Deletes everything defined in .tf files.
+
+Useful for:
+
+Labs
+
+Practice
+
+Avoiding unexpected charges
+
+📂 Important Terraform Files
+File	Purpose
+.tf	Infrastructure definition
+terraform.tfstate	Current infrastructure record
+.terraform/	Provider plugins
+terraform.tfvars	Variable values
+🧠 Terraform Core Concepts
+
+Providers
+
+Resources
+
+Variables
+
+Outputs
+
+State management
+
+Execution plan
+
+⚡ Quick Command Summary
+terraform init
+terraform validate
+terraform plan
+terraform apply
+terraform destroy
+
+
+
+🔁 Master–Slave Architecture
+
+Master–Slave (also called Primary–Replica or Leader–Follower) is a system design where one main node controls and other nodes follow its instructions.
+
+It is widely used in databases, distributed systems, and DevOps pipelines.
+
+📌 Basic Idea
+
+Master → makes decisions, accepts writes/updates
+
+Slaves → replicate data, serve reads, execute assigned tasks
+
+🧭 How It Works
+Client → Master → Slaves
+           ↓
+       Replication
+
+
+Client sends request to Master.
+
+Master processes it.
+
+Changes are copied to Slave nodes.
+
+Slaves stay synchronized.
+
+🎯 Responsibilities
+Master Node
+
+Accepts write operations
+
+Maintains authoritative data
+
+Sends updates to slaves
+
+Handles coordination
+
+Slave Nodes
+
+Receive replicated data
+
+Serve read requests
+
+Provide backup / redundancy
+
+Reduce master load
+
+✅ Advantages
+
+✔ High availability
+✔ Load balancing
+✔ Backup & recovery
+✔ Better performance for reads
+✔ Scalability
+
+❌ Disadvantages
+
+❌ Master is single point of failure (if no failover)
+❌ Replication delay may occur
+❌ Setup can be complex
+
+🧱 Real-World Examples
+
+Master–Slave is used in:
+
+MySQL replication
+
+Redis primary–replica
+
+Apache Hadoop NameNode & DataNodes
+
+CI/CD controller & agents
+
+🔄 Failover (Advanced)
+
+If Master fails:
+
+One Slave can be promoted as new Master
+
+System continues working
+
+This improves reliability.
+
+📊 Use Cases
+
+Database replication
+
+Distributed computing
+
+Data backup
+
+Read-heavy applications
+
+Cluster management
