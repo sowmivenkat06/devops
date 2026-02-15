@@ -1,0 +1,122 @@
+
+📦 Ansible Automation Process
+
+Ansible is an agentless automation tool used for configuration management, application deployment, and orchestration. It connects to target machines using SSH and executes tasks defined in Playbooks.
+
+🧭 Step-by-Step Ansible Flow
+1️⃣ Install Ansible (Control Node)
+
+Install Ansible on the machine from which automation will be executed.
+
+sudo apt update
+sudo apt install ansible -y
+
+
+Verify installation:
+
+ansible --version
+
+2️⃣ Prepare Managed Nodes
+
+Ensure:
+
+SSH access is enabled.
+
+Python is installed.
+
+The control node can reach the hosts.
+
+Test:
+
+ssh user@target-ip
+
+3️⃣ Create Inventory File
+
+The inventory file contains IP addresses or hostnames of managed machines.
+
+Example (/etc/ansible/hosts or custom file):
+
+[web]
+192.168.1.10
+
+[db]
+192.168.1.20
+
+4️⃣ Test Connectivity (Ping)
+
+Check if Ansible can communicate with nodes.
+
+ansible all -m ping
+
+
+Expected output → SUCCESS.
+
+5️⃣ Write a Playbook
+
+A playbook defines tasks to run on managed nodes using YAML format.
+
+Example: install_nginx.yml
+
+---
+- name: Install Nginx
+  hosts: web
+  become: yes
+
+  tasks:
+    - name: Install nginx package
+      apt:
+        name: nginx
+        state: present
+
+6️⃣ Run the Playbook
+
+Execute automation tasks.
+
+ansible-playbook install_nginx.yml
+
+7️⃣ Verify Changes
+
+Login to the target system and confirm service/package installation.
+
+systemctl status nginx
+
+🧠 What Happens Internally?
+
+Ansible reads the inventory.
+
+Connects via SSH.
+
+Pushes modules to nodes.
+
+Executes tasks.
+
+Returns output.
+
+Removes temporary files.
+
+📁 Recommended Project Structure
+ansible-project/
+│── inventory
+│── playbook.yml
+│── roles/
+│── group_vars/
+│── host_vars/
+
+🚀 Common Ad-Hoc Commands
+
+Install package:
+
+ansible web -m apt -a "name=git state=present" --become
+
+
+Restart service:
+
+ansible web -m service -a "name=nginx state=restarted" --become
+
+🔐 Advantages of Ansible
+
+✔ Agentless
+✔ Uses SSH
+✔ Simple YAML syntax
+✔ Idempotent execution
+✔ Easy scaling

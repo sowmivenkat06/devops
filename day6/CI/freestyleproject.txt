@@ -1,0 +1,97 @@
+🚀 Goal
+GitHub Repo → Jenkins Freestyle Job → Code in Workspace
+
+✅ Step 1 – Make sure Git is installed on Jenkins machine
+
+In your Ubuntu VM:
+
+git --version
+
+
+If not:
+
+sudo apt install git -y
+
+✅ Step 2 – Add GitHub Token in Jenkins
+
+Jenkins →
+Manage Jenkins → Credentials → Global → Add Credentials
+
+Choose:
+
+Kind → Username with password
+
+
+Fill:
+
+Field	Value
+Username	your GitHub username
+Password	GitHub token
+ID	github-token
+
+Save.
+
+✅ Step 3 – Create Freestyle Project
+
+Jenkins Dashboard → New Item
+
+Name:
+
+git-trial
+
+
+Select:
+
+Freestyle project
+
+
+Click OK.
+
+✅ Step 4 – Configure Source Code Management
+
+Under:
+
+Source Code Management
+
+
+Select:
+
+Git
+
+Repository URL
+
+Example:
+
+https://github.com/yourusername/terraform-dev.git
+
+Credentials
+
+Select:
+
+github-token
+
+✅ Step 5 – Add Build Step (to prove cloning)
+
+Scroll → Build → Add build step →
+
+Choose:
+
+Execute shell
+
+
+Write:
+
+pwd
+ls -l
+
+✅ Step 6 – Save
+
+Click Save.
+
+✅ Step 7 – Build Now 🚀
+
+Click Build Now.
+
+🎉 Expected Console Output
+
+Open build → Console Output.
