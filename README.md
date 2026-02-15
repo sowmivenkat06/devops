@@ -1,4 +1,4 @@
-# DevOps Practical Learning – 6 Day Journey
+# DevOps Learning
 
 ## 🎯 Aim
 To understand and practice foundational DevOps tools and workflows including:
