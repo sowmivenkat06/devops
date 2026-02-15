@@ -1,0 +1,241 @@
+AWS EC2 Lab – Windows & Ubuntu + Apache + GitHub Deployment
+✅ PART 1 – Create Key Pair
+
+Login to AWS Console
+
+Go to EC2 → Key Pairs → Create key pair
+
+Name: devops-key
+
+Type: RSA
+
+Format: .pem
+
+Download & save safely
+
+✅ PART 2 – Launch Ubuntu Instance
+
+EC2 → Launch Instance
+
+Name: ubuntu-apache
+
+AMI: Ubuntu Server 22.04
+
+Instance Type: t2.micro
+
+Key Pair: devops-key
+
+Network:
+
+Allow SSH (22)
+
+Allow HTTP (80)
+
+Launch
+
+✅ PART 3 – Launch Windows Instance
+
+EC2 → Launch Instance
+
+Name: windows-server
+
+AMI: Microsoft Windows Server
+
+Instance Type: t2.micro
+
+Key Pair: devops-key
+
+Network:
+
+Allow RDP (3389)
+
+Launch
+
+💻 PART 4 – Connect to Ubuntu (SSH)
+
+Open terminal in folder where pem file is downloaded.
+
+chmod 400 devops-key.pem
+
+ssh -i devops-key.pem ubuntu@<PUBLIC-IP>
+
+
+Example:
+
+ssh -i devops-key.pem ubuntu@15.206.xx.xx
+
+🌐 PART 5 – Install Apache in Ubuntu
+
+Update packages:
+
+sudo apt update
+
+
+Install apache:
+
+sudo apt install apache2 -y
+
+
+Start service:
+
+sudo systemctl start apache2
+
+
+Enable on boot:
+
+sudo systemctl enable apache2
+
+
+Check status:
+
+sudo systemctl status apache2
+
+🧪 PART 6 – Test Apache Default Page
+
+Open browser:
+
+http://<ubuntu-public-ip>
+
+
+You should see Apache2 Ubuntu Default Page.
+
+📝 PART 7 – Create Sample HTML Page
+
+Go to web directory:
+
+cd /var/www/html
+
+
+Remove default file:
+
+sudo rm index.html
+
+
+Create new file:
+
+sudo nano index.html
+
+
+Add:
+
+<h1>Server Working Successfully</h1>
+<h2>DevOps Lab</h2>
+
+
+Save:
+
+CTRL + X → Y → ENTER
+
+
+Refresh browser.
+
+📥 PART 8 – Install Git
+sudo apt install git -y
+
+
+Check:
+
+git --version
+
+🚀 PART 9 – Deploy Your GitHub Project
+
+Move to temp directory:
+
+cd /tmp
+
+
+Clone repo:
+
+git clone https://github.com/sowmivenkat06/todo.git
+
+
+Check files:
+
+cd todo
+ls
+
+Copy project to Apache folder
+sudo cp -r * /var/www/html/
+
+
+Give permissions:
+
+sudo chmod -R 755 /var/www/html
+
+Restart apache
+sudo systemctl restart apache2
+
+Access in browser
+http://192.168.213.128/
+
+
+Your todo app should open.
+
+🪟 PART 10 – Connect to Windows Server
+
+Go to:
+
+EC2 → Instances → Select Windows → Connect
+
+Choose RDP client.
+
+Get password
+
+Click Get Password
+
+Upload devops-key.pem
+
+Decrypt
+
+Copy username & password
+
+Open Remote Desktop
+
+In Windows PC:
+
+Win + R → mstsc
+
+
+Enter public IP → Connect
+Enter credentials.
+
+📸 PART 11 – Take Screenshot in Windows
+
+Inside RDP session:
+
+Use:
+
+Snipping Tool
+
+
+or
+
+PrtSc
+
+
+Save screenshot.
+
+🚪 PART 12 – Exit Windows Server
+
+Simply close the RDP window or:
+
+Start → Sign out
+
+🧹 PART 13 – (IMPORTANT) Stop / Terminate to Avoid Billing
+
+After lab:
+
+EC2 → Instances
+
+Select instances →
+Instance state → Stop
+or
+Terminate
+
+✅ Final Output
+
+✔ Ubuntu running Apache
+✔ Sample page working
+✔ GitHub project deployed
+✔ Windows login screenshot taken
+✔ Instances stopped
