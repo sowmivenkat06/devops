@@ -1,0 +1,332 @@
+CREATE NEW ITEM IN JENKINS (NAME: devops)
+STEP 1: Open Jenkins
+
+Open browser:
+
+http://localhost:8080
+
+Login with credentials.
+
+STEP 2: Click New Item
+
+From dashboard → New Item
+
+STEP 3: Enter Name
+
+Type:
+
+devops
+
+STEP 4: Select Type
+
+Choose:
+
+Freestyle Project
+
+STEP 5: Click OK → Save
+
+✅ Job created successfully.
+
+  TRIGGER CREATION (UPSTREAM → DOWNSTREAM)
+STEP 1: Create job1
+
+New Item → job1 → Freestyle → OK → Save
+
+STEP 2: Create job2
+
+New Item → job2 → Freestyle → OK → Save
+
+STEP 3: Configure job1 to trigger job2
+
+Open job1 → Configure
+
+Post-build Actions → Build other projects
+
+Projects to build:
+
+job2
+
+
+Select:
+
+Trigger only if build is stable
+
+
+Save.
+
+STEP 4: Add build steps (optional for demo)
+
+job1:
+
+echo "Running Job 1"
+
+
+job2:
+
+echo "Running Job 2"
+
+STEP 5: Test
+
+Build job1.
+
+✔ job1 runs
+✔ If success → job2 starts automatically
+
+FLOW
+job1 → job2
+
+WHAT IS UPSTREAM & DOWNSTREAM ?
+Term	Meaning
+Upstream- Job	The job that runs first
+Downstream- Job	Job triggered after upstream succeeds
+
+Example:
+
+job1 → job2
+
+
+job1 = Upstream
+job2 = Downstream
+
+Used for multi-step CI/CD flows.
+
+CI/CD PIPELINE (GIT → JENKINS → DOCKER)
+STEP 1: Push code to GitHub
+
+Repo should contain:
+
+Dockerfile
+server.js / app.js
+package.json
+
+
+Commands:
+
+git init
+git add .
+git commit -m "initial"
+git branch -M main
+git remote add origin https://github.com/sowmivenat06/devops.git
+git push -u origin main
+
+STEP 2: Install Plugins
+
+Manage Jenkins → Manage Plugins
+
+Install:
+
+Git Plugin
+
+Docker Pipeline Plugin
+
+Restart Jenkins.
+
+STEP 3: Create Pipeline Job
+
+New Item →
+Name:
+
+devops-pipeline
+
+
+Select → Pipeline → OK
+
+STEP 4: Pipeline Script
+  pipeline {
+    agent any
+
+    stages {
+
+        stage('Clone Repo') {
+            steps {
+                git branch: 'day3', url: 'https://github.com/sowmivenkat06/devops.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('day3/E-learning-devops') {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Build Application') {
+            steps {
+                dir('day3/E-learning-devops') {
+                    sh 'npm run build'
+                }
+            }
+        }
+    }
+}
+
+STEP 5: Build
+
+Click:
+
+Build Now
+
+
+Console shows:
+✔ Clone
+✔ Build
+✔ Run container
+
+STEP 6: Access Application
+http://localhost:7000
+
+
+or EC2:
+
+http://<public-ip>:7000
+
+
+Output example:
+
+Hello Sowmiya – Jenkins and Docker deployment running successfully
+
+
+
+
+WHAT IS JENKINS CORE ?
+
+Jenkins Core is the main engine of Jenkins.
+
+It provides:
+
+Job scheduling
+
+Build execution
+
+Plugin support
+
+UI & API
+
+Node/agent handling
+
+Without core → Jenkins cannot run.
+
+Plugins extend Jenkins features.
+
+✅ WHAT IS A .sh FILE ?
+
+.sh = Shell Script
+
+It contains Linux commands.
+
+Example:
+
+#!/bin/bash
+echo "Build started"
+docker build -t app .
+
+
+Instead of writing commands inside Jenkins, we can call:
+
+sh script.sh
+
+
+Used for:
+✔ automation
+✔ reusability
+✔ version control
+
+✅ WHAT IS sudo chmod +x ?
+
+Command:
+
+sudo chmod +x script.sh
+
+
+Meaning:
+
+chmod → change permission
+
++x → make executable
+
+After this, file can run like:
+
+./script.sh
+
+
+Without permission → permission denied error.
+
+✅ WHAT ARE TRIGGERS IN JENKINS ?
+
+Triggers tell Jenkins WHEN to run a job.
+
+Types:
+
+Manual (Build Now)
+
+GitHub webhook (on push)
+
+Poll SCM
+
+Scheduled (cron time)
+
+After another job
+
+✅ CRONTAB GURU TIME FORMAT (USED IN PIPELINE)
+
+Used for scheduled builds.
+
+Example in Jenkins:
+
+Build periodically
+
+
+Example expression:
+
+H/5 * * * *
+
+
+Meaning:
+
+Every 5 minutes
+
+
+Format:
+
+MIN HOUR DAY MONTH DAY-OF-WEEK
+
+
+Examples:
+
+Expression	Meaning
+H/5 * * * *	every 5 mins
+0 9 * * *	daily at 9 AM
+0 0 * * 0	every Sunday
+
+You can verify at:
+
+crontab.guru
+
+✅ GITHUB AUTO TRIGGER (WEBHOOK)
+
+Pipeline → Configure → Build Triggers
+
+Tick:
+
+GitHub hook trigger for GITScm polling
+
+
+GitHub → Settings → Webhooks
+
+Payload URL:
+
+http://<server-ip>:8080/github-webhook/
+
+
+Now every push → automatic build.
+
+✅ COMPLETE CI/CD FLOW
+Developer push →
+GitHub →
+Jenkins →
+Docker Build →
+Docker Run →
+Application Live (7000)
+
+
