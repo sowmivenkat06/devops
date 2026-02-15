@@ -1,4 +1,110 @@
+1) Install Jenkins (Ubuntu)
+Step 1 – Update packages
+sudo apt update
+
+Step 2 – Install Java (required)
+sudo apt install openjdk-17-jre -y
+
+
+Check:
+
+java -version
+
+Step 3 – Add Jenkins repository key
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+
+Step 4 – Add repository
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+Step 5 – Install Jenkins
+sudo apt update
+sudo apt install jenkins -y
+
+Step 6 – Start Jenkins
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+
+
+Check status:
+
+sudo systemctl status jenkins
+
+Step 7 – Open Jenkins in browser
+http://<server-ip>:8080
+
+
+Example:
+
+http://localhost:8080
+
+Step 8 – Get Admin Password
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+
+Copy → paste in browser.
+
+Step 9 – Install Suggested Plugins
+
+Click:
+
+Install suggested plugins
+
+✅ 2) Create User Account in Jenkins
+
+After plugin installation:
+
+Click:
+
+Create First Admin User
+
+
+Fill:
+
+Username
+Password
+Confirm password
+Full name
+Email
+
+
+Click:
+
+Save and Continue
+
+
+Jenkins dashboard opens.
+
+Create Additional Users (later)
+
+Manage Jenkins → Manage Users → Create User
+
 CREATE NEW ITEM IN JENKINS (NAME: devops)
+3) What is a Trigger in Jenkins?
+
+A trigger tells Jenkins WHEN to run a job automatically.
+
+Examples:
+
+GitHub push
+
+Every day at 9 AM
+
+After another job finishes
+
+Types of Build Triggers
+
+Inside job → Build Triggers
+
+Common options:
+
+✔ Poll SCM
+✔ Build periodically
+✔ GitHub hook trigger
+✔ Build after other projects
+
 STEP 1: Open Jenkins
 
 Open browser:
@@ -90,7 +196,16 @@ job2 = Downstream
 
 Used for multi-step CI/CD flows.
 
+2) Jenkins Pipeline Process
+
+Pipeline = automation using code.
+
+Instead of clicking steps manually, we write them in a file.
+
 CI/CD PIPELINE (GIT → JENKINS → DOCKER)
+Pipeline Stages (Flow)
+Fetch Code → Build → Test → Deploy
+
 STEP 1: Push code to GitHub
 
 Repo should contain:
@@ -186,6 +301,17 @@ Output example:
 
 Hello Sowmiya – Jenkins and Docker deployment running successfully
 
+How Pipeline Runs:
+
+When triggered:
+
+Jenkins reads Jenkinsfile
+
+Executes stage by stage
+
+Shows progress in Stage View
+
+Success / Failure result displayed
 
 
 
