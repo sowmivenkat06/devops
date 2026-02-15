@@ -1,0 +1,339 @@
+DevOps Automation – End-to-End Flow
+
+This document explains the standard DevOps lifecycle covering source code integration, infrastructure provisioning, configuration management, and distributed system architecture.
+
+Flow:
+
+GitHub Repository → Jenkins Job → Infrastructure → Configuration → Execution
+
+🔧 GitHub → Jenkins Freestyle Job → Workspace
+Goal
+
+Pull code from GitHub into Jenkins workspace and run build steps.
+
+1. Install Git on Jenkins Machine
+git --version
+
+
+If not installed:
+
+sudo apt install git -y
+
+2. Add GitHub Token in Jenkins
+
+Navigate:
+
+Manage Jenkins → Credentials → Global → Add Credentials
+
+Choose:
+
+Kind → Username with password
+
+Fill:
+
+Username → GitHub username
+
+Password → GitHub Personal Access Token
+
+ID → github-token
+
+Save.
+
+3. Create Freestyle Project
+
+Jenkins Dashboard → New Item
+
+Name: git-trial
+
+Select Freestyle project → OK.
+
+4. Configure Source Code Management
+
+Under Source Code Management:
+
+Select Git
+
+Repository URL:
+
+https://github.com/yourusername/yourrepo.git
+
+
+Credentials:
+
+github-token
+
+5. Add Build Step
+
+Build → Add build step → Execute shell
+
+pwd
+ls -l
+
+
+This confirms repository cloning.
+
+6. Save Project
+
+Click Save.
+
+7. Build Now
+
+Click Build Now → open Console Output.
+
+Expected:
+Repository files will appear in Jenkins workspace.
+
+📦 Ansible Automation Process
+What is Ansible?
+
+Ansible is an agentless automation tool for:
+
+Configuration management
+
+Application deployment
+
+Server orchestration
+
+It connects using SSH and executes YAML playbooks.
+
+Step-by-Step Flow
+1. Install Ansible (Control Node)
+sudo apt update
+sudo apt install ansible -y
+
+
+Verify:
+
+ansible --version
+
+2. Prepare Managed Nodes
+
+Ensure:
+
+SSH enabled
+
+Python installed
+
+Reachable from control node
+
+Test:
+
+ssh user@target-ip
+
+3. Create Inventory File
+
+Example:
+
+[web]
+192.168.1.10
+
+[db]
+192.168.1.20
+
+4. Test Connectivity
+ansible all -m ping
+
+
+Expected → SUCCESS.
+
+5. Write a Playbook
+
+Example:
+
+---
+- name: Install Nginx
+  hosts: web
+  become: yes
+
+  tasks:
+    - name: Install nginx package
+      apt:
+        name: nginx
+        state: present
+
+6. Run Playbook
+ansible-playbook install_nginx.yml
+
+7. Verify
+systemctl status nginx
+
+Internal Working
+
+Reads inventory
+
+Connects via SSH
+
+Pushes modules
+
+Executes
+
+Returns results
+
+Cleans temporary files
+
+Common Ad-Hoc Commands
+
+Install package:
+
+ansible web -m apt -a "name=git state=present" --become
+
+
+Restart service:
+
+ansible web -m service -a "name=nginx state=restarted" --become
+
+Advantages
+
+✔ Agentless
+✔ SSH based
+✔ YAML syntax
+✔ Idempotent
+✔ Easy scaling
+
+📌 Terraform Workflow (Infrastructure as Code)
+What is Terraform?
+
+Terraform provisions and manages infrastructure using code instead of manual setup.
+
+Lifecycle
+
+Write → Init → Validate → Plan → Apply → Verify → Destroy
+
+1. Write Configuration
+
+Example:
+
+provider "aws" {
+  region = "ap-south-1"
+}
+
+resource "aws_instance" "myvm" {
+  ami           = "ami-xxxxxxxx"
+  instance_type = "t3.micro"
+}
+
+2. Initialize
+terraform init
+
+
+Downloads plugins & prepares environment.
+
+3. Validate
+terraform validate
+
+
+Checks syntax only.
+
+4. Plan (Dry Run)
+terraform plan
+
+
+Shows what will change.
+
+5. Apply
+terraform apply
+
+
+Creates infrastructure.
+
+Skip confirmation:
+
+terraform apply -auto-approve
+
+6. Verify
+
+Check resources in cloud console.
+
+7. Update
+
+Modify files → run:
+
+terraform plan
+terraform apply
+
+8. Destroy (Avoid Billing)
+terraform destroy
+
+
+Deletes everything created.
+
+Important Files
+
+.tf → config
+
+terraform.tfstate → current state
+
+.terraform/ → plugins
+
+terraform.tfvars → variable values
+
+Quick Commands
+terraform init
+terraform validate
+terraform plan
+terraform apply
+terraform destroy
+
+🔁 Master–Slave Architecture
+
+Also called Primary–Replica / Leader–Follower.
+
+Concept
+
+Master → accepts writes, controls system
+
+Slaves → replicate data, handle reads
+
+Working
+
+Client → Master → Slaves
+
+Master processes request → replicates to slaves.
+
+Responsibilities
+Master
+
+Writes
+
+Data authority
+
+Sends updates
+
+Coordination
+
+Slaves
+
+Receive replication
+
+Read traffic
+
+Backup
+
+Reduce master load
+
+Advantages
+
+✔ High availability
+✔ Load balancing
+✔ Redundancy
+✔ Scalability
+
+Disadvantages
+
+❌ Single point of failure (without failover)
+❌ Replication delay
+❌ Complex setup
+
+Real Examples
+
+Used in:
+
+Database replication
+
+Distributed systems
+
+CI/CD controllers & agents
+
+Failover
+
+If master fails → a slave can become new master.
