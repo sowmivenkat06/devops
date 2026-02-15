@@ -79,6 +79,75 @@ This documentation outlines the outcomes and procedures followed over six days o
 - Covered infrastructure as code fundamentals and Terraform commands.
 - Discussed Master–Slave architecture, roles, benefits, and challenges.
 
+# ☸️ Kubernetes & Prometheus – DevOps Essentials
+
+## Kubernetes – Container Orchestration
+Kubernetes is a powerful system for managing containerized applications across clusters of machines.  
+It automates deployment, scaling, and operations of application containers.
+
+### What Kubernetes Does
+- ✔ Deploys containers automatically  
+- ✔ Restarts failed containers (self-healing)  
+- ✔ Scales applications up/down based on load  
+- ✔ Load balances traffic across pods  
+- ✔ Performs rolling updates without downtime  
+
+### Core Components
+- **Cluster** → Group of machines (nodes) managed together  
+- **Node** → Individual server (worker machine)  
+- **Pod** → Smallest deployable unit (contains one or more containers)  
+- **Service** → Exposes application to the network  
+- **Deployment** → Manages replicas & rolling updates  
+
+### Why Kubernetes?
+- High availability  
+- Auto healing  
+- Auto scaling  
+- Easy updates without downtime  
+
+---
+
+## Prometheus – Monitoring & Alerting
+Prometheus is a monitoring and alerting toolkit designed for reliability and scalability.  
+It collects and stores metrics as time-series data, enabling visibility into system health.
+
+### What Prometheus Does
+- ✔ Collects CPU, memory, and network usage metrics  
+- ✔ Stores time-series data for analysis  
+- ✔ Creates dashboards (often integrated with **Grafana**)  
+- ✔ Sends alerts when failures or anomalies occur  
+
+### Key Concepts
+- **Metrics** → Numerical data collected from systems  
+- **Targets** → Systems being monitored  
+- **Alertmanager** → Handles notifications and alert routing  
+
+### Why Important in DevOps?
+After deployment, monitoring ensures:
+- Applications are running correctly  
+- Performance remains optimal  
+- Errors are detected quickly  
+
+Prometheus provides **observability** into infrastructure and applications.
+
+---
+
+## 🧠 Master–Slave Architecture
+A common distributed design pattern:
+- **Master** → Controls and assigns tasks  
+- **Slave/Worker** → Executes tasks  
+
+Examples:
+- Jenkins build pipelines  
+- Kubernetes clusters (control plane vs. worker nodes)  
+
+---
+
+## Summary
+- **Kubernetes** → Automates container orchestration (deployment, scaling, healing).  
+- **Prometheus** → Provides monitoring, alerting, and visibility into system health.  
+- Together, they form the backbone of modern **DevOps workflows**.
+- 
 ---
 
 ## 📝 Conclusion
