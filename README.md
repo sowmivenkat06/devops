@@ -93,3 +93,22 @@ Over six days of practical exercises, this DevOps training covered key tools and
 ✔ Infrastructure provisioning with Terraform  
 
 Each day built upon the last to form a comprehensive DevOps skill set that enables automated build, test, and deployment pipelines, scalable infrastructure management, and efficient collaboration.
+
+☸️ Kubernetes – Container Orchestration
+Kubernetes helps manage, scale, and maintain containerized applications automatically.
+Instead of running containers manually, Kubernetes: ✔ Deploys containers
+✔ Restarts failed containers
+✔ Scales up/down based on load
+✔ Load balances traffic
+✔ Performs rolling updates
+Core Components
+Cluster → group of machines.
+Node → individual server.
+Pod → smallest deployable unit (contains container).
+Service → exposes application.
+Deployment → manages replicas & updates.
+Why Kubernetes?
+High availability
+Auto healing
+Auto scaling
+Easy updates without downtime
