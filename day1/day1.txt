@@ -1,90 +1,159 @@
+=====================================================
+LINUX, WINDOWS, VM & BASIC COMMANDS
+=====================================================
 
-# Linux, Windows, VM & Commands
 
-## **Windows OS**
+-------------------------
+WINDOWS OPERATING SYSTEM
+-------------------------
+Windows is a paid, GUI-based operating system developed by Microsoft.
+It is mainly used for desktops and general applications.
 
-**Windows** is a *paid*, GUI-based operating system developed by Microsoft. It is mainly used for desktops and general applications. Command-line work is done through *Command Prompt* or *PowerShell*. Customization is limited compared to Linux.
+Command-line work is done through:
+- Command Prompt
+- PowerShell
 
-## **Linux OS**
+Customization is limited compared to Linux.
 
-**Linux** is *free and open-source*. It is secure, stable, lightweight, and widely used in *servers, cloud, and DevOps*. Most operations are done through the *terminal*. Popular distributions include Ubuntu, CentOS, and Red Hat.
 
-## **Windows vs Linux**
+-------------------------
+LINUX OPERATING SYSTEM
+-------------------------
+Linux is free and open-source.
+It is secure, stable, lightweight, and widely used in servers, cloud, and DevOps.
 
-Windows is easier for everyday users. Linux offers *better security, automation,* and *flexibility*, making it ideal for servers and development work.
+Most operations are done through the terminal.
 
----
+Popular distributions:
+- Ubuntu
+- CentOS
+- Red Hat
 
-## **Virtual Machine (VM)**
 
-A **VM** is a computer running inside another computer. It helps run multiple operating systems on the same hardware. Example: running Ubuntu inside Windows using VMware.
+-------------------------
+WINDOWS VS LINUX
+-------------------------
+Windows is easier for everyday users.
 
-*Host OS* = main system.
-*Guest OS* = OS inside the VM.
+Linux provides:
+- Better security
+- Automation
+- Flexibility
 
-**NAT** shares host internet, while **Bridged** gives a separate IP.
+Therefore, Linux is ideal for servers and development.
 
----
 
-## **WSL**
+-------------------------
+VIRTUAL MACHINE (VM)
+-------------------------
+A VM is a computer running inside another computer.
 
-**Windows Subsystem for Linux** lets you run Linux commands in Windows *without a full VM*. It is faster and lightweight but provides less isolation.
+It allows multiple operating systems on the same hardware.
 
----
+Example:
+Running Ubuntu inside Windows using VMware.
 
-## **VMware**
+Host OS  = Main operating system
+Guest OS = OS inside the VM
 
-**VMware Workstation** is used to create virtual machines. After installation, you can load an OS ISO like Ubuntu and practice Linux safely.
+Network types:
+NAT      -> Shares host internet
+Bridged  -> Gets separate IP
 
----
 
-## **Ubuntu Installation (Basic Flow)**
+-------------------------
+WSL (Windows Subsystem for Linux)
+-------------------------
+WSL lets you run Linux commands in Windows without a full virtual machine.
 
-Create VM → attach ISO → select disk → create username/password → install → reboot → update using:
+Advantages:
+- Faster
+- Lightweight
 
-```
+Limitation:
+- Less isolation compared to VM.
+
+
+-------------------------
+VMWARE
+-------------------------
+VMware Workstation is software used to create virtual machines.
+
+Process:
+Install VMware -> Load OS ISO -> Install OS -> Practice Linux safely.
+
+
+-------------------------
+UBUNTU INSTALLATION (BASIC FLOW)
+-------------------------
+Create VM
+Attach ISO
+Select disk
+Create username and password
+Install
+Reboot
+
+After installation run:
+
 sudo apt update
 sudo apt upgrade
-```
 
----
 
-## **Important Linux Commands**
+-------------------------
+IMPORTANT LINUX COMMANDS
+-------------------------
+pwd     -> Show current directory
+ls      -> List files
+cd      -> Change directory
+mkdir   -> Create folder
+touch   -> Create file
+cp      -> Copy
+mv      -> Move / Rename
+rm      -> Delete
 
-`pwd` shows location. `ls` lists files. `cd` changes directory.
-`mkdir` creates folders. `touch` creates files.
-`cp` copies, `mv` moves, `rm` deletes.
+cat     -> Display file content
+less    -> View file page by page
+grep    -> Search text
+chmod   -> Change permissions
 
-`cat` and `less` read files.
-`grep` searches text.
-`chmod` changes permissions.
+top     -> View running processes
+ip a    -> Show IP address
 
-Use `top` to view processes, `ip a` for IP address.
 
----
+-------------------------
+PACKAGE MANAGEMENT
+-------------------------
+APT is used to manage software.
 
-## **Package Management**
+sudo apt update   -> Refresh package list
+sudo apt upgrade  -> Install updates
+sudo apt install <package-name> -> Install new software
 
-Use APT to manage software.
-*update* refreshes list, *upgrade* installs latest versions, and *install* adds new packages.
 
----
+-------------------------
+VI EDITOR
+-------------------------
+i     -> Enter insert mode
+Esc   -> Exit insert mode
+:w    -> Save
+:q    -> Quit
+:wq   -> Save and quit
 
-## **vi Editor**
 
-Press *i* to type, *Esc* to stop, `:w` to save, `:q` to quit, `:wq` to save and exit.
+-------------------------
+LTS (LONG TERM SUPPORT)
+-------------------------
+LTS versions receive updates and security patches for many years.
+Recommended for servers.
 
----
 
-## **LTS**
+-------------------------
+rm -rf
+-------------------------
+Used to force delete files and folders recursively.
 
-*Long Term Support* versions receive updates for many years and are recommended for servers.
+WARNING:
+This command can permanently delete everything.
+Use carefully.
 
----
-
-## **rm -rf**
-
-Used to *force delete* files and folders recursively. Be very careful.
-
----
 
