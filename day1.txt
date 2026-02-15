@@ -1,0 +1,159 @@
+=====================================================
+LINUX, WINDOWS, VM & BASIC COMMANDS
+=====================================================
+
+
+-------------------------
+WINDOWS OPERATING SYSTEM
+-------------------------
+Windows is a paid, GUI-based operating system developed by Microsoft.
+It is mainly used for desktops and general applications.
+
+Command-line work is done through:
+- Command Prompt
+- PowerShell
+
+Customization is limited compared to Linux.
+
+
+-------------------------
+LINUX OPERATING SYSTEM
+-------------------------
+Linux is free and open-source.
+It is secure, stable, lightweight, and widely used in servers, cloud, and DevOps.
+
+Most operations are done through the terminal.
+
+Popular distributions:
+- Ubuntu
+- CentOS
+- Red Hat
+
+
+-------------------------
+WINDOWS VS LINUX
+-------------------------
+Windows is easier for everyday users.
+
+Linux provides:
+- Better security
+- Automation
+- Flexibility
+
+Therefore, Linux is ideal for servers and development.
+
+
+-------------------------
+VIRTUAL MACHINE (VM)
+-------------------------
+A VM is a computer running inside another computer.
+
+It allows multiple operating systems on the same hardware.
+
+Example:
+Running Ubuntu inside Windows using VMware.
+
+Host OS  = Main operating system
+Guest OS = OS inside the VM
+
+Network types:
+NAT      -> Shares host internet
+Bridged  -> Gets separate IP
+
+
+-------------------------
+WSL (Windows Subsystem for Linux)
+-------------------------
+WSL lets you run Linux commands in Windows without a full virtual machine.
+
+Advantages:
+- Faster
+- Lightweight
+
+Limitation:
+- Less isolation compared to VM.
+
+
+-------------------------
+VMWARE
+-------------------------
+VMware Workstation is software used to create virtual machines.
+
+Process:
+Install VMware -> Load OS ISO -> Install OS -> Practice Linux safely.
+
+
+-------------------------
+UBUNTU INSTALLATION (BASIC FLOW)
+-------------------------
+Create VM
+Attach ISO
+Select disk
+Create username and password
+Install
+Reboot
+
+After installation run:
+
+sudo apt update
+sudo apt upgrade
+
+
+-------------------------
+IMPORTANT LINUX COMMANDS
+-------------------------
+pwd     -> Show current directory
+ls      -> List files
+cd      -> Change directory
+mkdir   -> Create folder
+touch   -> Create file
+cp      -> Copy
+mv      -> Move / Rename
+rm      -> Delete
+
+cat     -> Display file content
+less    -> View file page by page
+grep    -> Search text
+chmod   -> Change permissions
+
+top     -> View running processes
+ip a    -> Show IP address
+
+
+-------------------------
+PACKAGE MANAGEMENT
+-------------------------
+APT is used to manage software.
+
+sudo apt update   -> Refresh package list
+sudo apt upgrade  -> Install updates
+sudo apt install <package-name> -> Install new software
+
+
+-------------------------
+VI EDITOR
+-------------------------
+i     -> Enter insert mode
+Esc   -> Exit insert mode
+:w    -> Save
+:q    -> Quit
+:wq   -> Save and quit
+
+
+-------------------------
+LTS (LONG TERM SUPPORT)
+-------------------------
+LTS versions receive updates and security patches for many years.
+Recommended for servers.
+
+
+-------------------------
+rm -rf
+-------------------------
+Used to force delete files and folders recursively.
+
+WARNING:
+This command can permanently delete everything.
+Use carefully.
+
+
